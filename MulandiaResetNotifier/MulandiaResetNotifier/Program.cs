@@ -16,7 +16,9 @@ namespace MulandiaResetNotifier
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            //mainForm form = new mainForm();
+            //form.Visible = false;
+            Application.Run(new mainForm());
         }
     }
 }

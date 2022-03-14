@@ -12,14 +12,15 @@ using Tulpep.NotificationWindow;
 
 namespace MulandiaResetNotifier
 {
-    public partial class Form1 : Form
+    public partial class mainForm : Form
     {
-        public Form1()
+        public mainForm()
         {
             InitializeComponent();
         }
         private Timer timerCheck;
         Process[] proc;
+
         private void Form1_Load(object sender, EventArgs e)
         {
             try
@@ -34,7 +35,7 @@ namespace MulandiaResetNotifier
                 } else if ( proc.Length == 1 )
                 {
                     InitTimer();
-                }              
+                }
             }
             catch (Exception ex)
             {
@@ -58,11 +59,16 @@ namespace MulandiaResetNotifier
             popup.Popup();
         }
 
+        public void setTimerInterval()
+        {
+            timerCheck.Interval = Convert.ToInt32(nudTimer.Value) * 60000; //Convertimos a segundos y seteamos el intervalo
+        }
+
         public void InitTimer()
         {
             timerCheck = new Timer();
             timerCheck.Tick += new EventHandler(resetTimerTick);
-            timerCheck.Interval = 10000; // in miliseconds
+            setTimerInterval();
             timerCheck.Start();
         }
 
@@ -70,12 +76,58 @@ namespace MulandiaResetNotifier
         {
             if (proc.Length == 1)
             {
-                string asd = proc[0].MainWindowTitle;
-                if (asd.Contains("Level: [400]"))
+                string windowTitle = proc[0].MainWindowTitle;
+                if (windowTitle.Contains("Level: [400]"))
                 {
                     launchResetPopUp();
                 }
             }
+        }
+
+        private void mainForm_Resize(object sender, System.EventArgs e)
+        {
+            if (FormWindowState.Minimized == WindowState)
+            {
+                Hide();
+            }
+        }
+
+        private void notifyIcon1_DoubleClick(object sender,
+                                     System.EventArgs e)
+        {
+            Show();
+            WindowState = FormWindowState.Normal;
+        }
+
+        private void asdToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Show();
+            WindowState = FormWindowState.Normal;
+        }
+
+        private void asdToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void formClose(object sender, FormClosedEventArgs e)
+        {
+            Hide();
+        }
+
+        private void timerChanged(object sender, EventArgs e)
+        {
+            setTimerInterval();
+        }
+
+        private void mainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Hide();
+        }
+
+        private void formClose(object sender, FormClosingEventArgs e)
+        {
+            Hide();
         }
     }
 }
