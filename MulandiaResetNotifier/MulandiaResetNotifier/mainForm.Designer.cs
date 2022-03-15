@@ -73,7 +73,7 @@
             // lblPretxb
             // 
             this.lblPretxb.AutoSize = true;
-            this.lblPretxb.Location = new System.Drawing.Point(12, 9);
+            this.lblPretxb.Location = new System.Drawing.Point(94, 9);
             this.lblPretxb.Name = "lblPretxb";
             this.lblPretxb.Size = new System.Drawing.Size(102, 13);
             this.lblPretxb.TabIndex = 2;
@@ -82,7 +82,7 @@
             // lblPosttxb
             // 
             this.lblPosttxb.AutoSize = true;
-            this.lblPosttxb.Location = new System.Drawing.Point(171, 9);
+            this.lblPosttxb.Location = new System.Drawing.Point(253, 9);
             this.lblPosttxb.Name = "lblPosttxb";
             this.lblPosttxb.Size = new System.Drawing.Size(44, 13);
             this.lblPosttxb.TabIndex = 3;
@@ -90,7 +90,7 @@
             // 
             // nudTimer
             // 
-            this.nudTimer.Location = new System.Drawing.Point(120, 7);
+            this.nudTimer.Location = new System.Drawing.Point(202, 7);
             this.nudTimer.Maximum = new decimal(new int[] {
             60,
             0,
@@ -115,7 +115,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(314, 33);
+            this.ClientSize = new System.Drawing.Size(416, 33);
             this.Controls.Add(this.nudTimer);
             this.Controls.Add(this.lblPosttxb);
             this.Controls.Add(this.lblPretxb);
@@ -123,7 +123,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "mainForm";
-            this.Text = "Mulandia Reset Notifier";
+            this.Text = "Mulandia Reset Notifier by Magus";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.formClose);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.formClose);
             this.Load += new System.EventHandler(this.Form1_Load);
