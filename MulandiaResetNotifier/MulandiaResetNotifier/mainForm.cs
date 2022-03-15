@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
 using System.Media;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tulpep.NotificationWindow;
 
@@ -26,18 +19,7 @@ namespace MulandiaResetNotifier
         {
             try
             {
-                // TODO: Obtener el PID del proceso lanzado desde el launcher para isolar el main de Mulandia
-                proc = Process.GetProcessesByName("main");
-                if( proc.Length < 1 )
-                {
-                    launchErrorPopUp("No se encuentra un main abierto.");
-                } else if (proc.Length > 1)
-                {
-                    launchErrorPopUp("Se encuentra mas de un main abierto");
-                } else if ( proc.Length == 1 )
-                {
-                    InitTimer(); //Iniciamos el timer
-                }
+                InitTimer(); //Iniciamos el timer
             }
             catch (Exception ex)
             {
@@ -51,8 +33,11 @@ namespace MulandiaResetNotifier
             popup.TitleText = "Personaje reseteado!";
             popup.ContentText = "Tu personaje llegó al nivel 400 y está listo para resetear";
             popup.Popup();
-            SoundPlayer notification = new SoundPlayer(Properties.Resources.Notification);
-            notification.Play();
+            if( chkBoxSonidoNotificacion.Checked )
+            {
+                SoundPlayer notification = new SoundPlayer(Properties.Resources.Notification);
+                notification.Play();
+            }
         }
 
         private void launchErrorPopUp(string message)
@@ -61,23 +46,42 @@ namespace MulandiaResetNotifier
             popup.TitleText = "Se produjo un error";
             popup.ContentText = message;
             popup.Popup();
+            if (chkBoxSonidoNotificacion.Checked)
+            {
+                SoundPlayer notification = new SoundPlayer(Properties.Resources.Error_Notification);
+                notification.Play();
+            }
         }
 
         public void setTimerInterval()
         {
-            timerCheck.Interval = Convert.ToInt32(nudTimer.Value) * 60000; //Convertimos a minutos y seteamos el intervalo
+            int minutos = 60000;
+            int segundos = 1000;
+            timerCheck.Interval = Convert.ToInt32(nudTimer.Value) * minutos; //Convertimos a minutos y seteamos el intervalo
         }
 
         public void InitTimer()
         {
             timerCheck = new Timer();
-            timerCheck.Tick += new EventHandler(resetTimerTick); // Cuando se vence el timeput lanzamos el evento
+            timerCheck.Tick += new EventHandler(resetTimerTick); // Cuando se vence el timeout lanzamos el evento
             setTimerInterval();
             timerCheck.Start();
         }
 
         private void resetTimerTick(object sender, EventArgs e) // Evento de vencimiento del timer
         {
+            // TODO: Obtener el PID del proceso lanzado desde el launcher para isolar el main de Mulandia
+            string processName = "main";
+            proc = Process.GetProcessesByName(processName);
+            if (proc.Length < 1)
+            {
+                launchErrorPopUp("No se encuentra un main abierto.");
+            }
+            else if (proc.Length > 1)
+            {
+                launchErrorPopUp("Se encuentra mas de un main abierto");
+            }
+
             if (proc.Length == 1)
             {
                 proc = Process.GetProcessesByName("main"); // Obtenemos nuevamente el proceso, ya que el title de la ventana va cambiando
@@ -103,17 +107,6 @@ namespace MulandiaResetNotifier
         {
             Show();
             WindowState = FormWindowState.Normal;
-        }
-
-        private void asdToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Show();
-            WindowState = FormWindowState.Normal;
-        }
-
-        private void asdToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
 
         private void formClose(object sender, FormClosedEventArgs e)

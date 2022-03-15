@@ -30,45 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
-            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.asdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.asdToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.lblPretxb = new System.Windows.Forms.Label();
             this.lblPosttxb = new System.Windows.Forms.Label();
             this.nudTimer = new System.Windows.Forms.NumericUpDown();
-            this.contextMenu.SuspendLayout();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.chkBoxSonidoNotificacion = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudTimer)).BeginInit();
             this.SuspendLayout();
-            // 
-            // notifyIcon
-            // 
-            this.notifyIcon.ContextMenuStrip = this.contextMenu;
-            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
-            this.notifyIcon.Text = "Mulandia Reset Notifier";
-            this.notifyIcon.Visible = true;
-            // 
-            // contextMenu
-            // 
-            this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.asdToolStripMenuItem,
-            this.asdToolStripMenuItem1});
-            this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(107, 48);
-            // 
-            // asdToolStripMenuItem
-            // 
-            this.asdToolStripMenuItem.Name = "asdToolStripMenuItem";
-            this.asdToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
-            this.asdToolStripMenuItem.Text = "Abrir";
-            this.asdToolStripMenuItem.Click += new System.EventHandler(this.asdToolStripMenuItem_Click);
-            // 
-            // asdToolStripMenuItem1
-            // 
-            this.asdToolStripMenuItem1.Name = "asdToolStripMenuItem1";
-            this.asdToolStripMenuItem1.Size = new System.Drawing.Size(106, 22);
-            this.asdToolStripMenuItem1.Text = "Cerrar";
-            this.asdToolStripMenuItem1.Click += new System.EventHandler(this.asdToolStripMenuItem1_Click);
             // 
             // lblPretxb
             // 
@@ -111,11 +79,30 @@
             0});
             this.nudTimer.ValueChanged += new System.EventHandler(this.timerChanged);
             // 
+            // notifyIcon
+            // 
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "Mulandia Reset Notifier";
+            this.notifyIcon.Visible = true;
+            // 
+            // chkBoxSonidoNotificacion
+            // 
+            this.chkBoxSonidoNotificacion.AutoSize = true;
+            this.chkBoxSonidoNotificacion.Checked = true;
+            this.chkBoxSonidoNotificacion.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoxSonidoNotificacion.Location = new System.Drawing.Point(97, 33);
+            this.chkBoxSonidoNotificacion.Name = "chkBoxSonidoNotificacion";
+            this.chkBoxSonidoNotificacion.Size = new System.Drawing.Size(184, 17);
+            this.chkBoxSonidoNotificacion.TabIndex = 6;
+            this.chkBoxSonidoNotificacion.Text = "Reproducir sonido de notificación";
+            this.chkBoxSonidoNotificacion.UseVisualStyleBackColor = true;
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(416, 33);
+            this.ClientSize = new System.Drawing.Size(416, 59);
+            this.Controls.Add(this.chkBoxSonidoNotificacion);
             this.Controls.Add(this.nudTimer);
             this.Controls.Add(this.lblPosttxb);
             this.Controls.Add(this.lblPretxb);
@@ -128,7 +115,6 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.formClose);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Resize += new System.EventHandler(this.mainForm_Resize);
-            this.contextMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudTimer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -136,14 +122,11 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.NotifyIcon notifyIcon;
-        private System.Windows.Forms.ContextMenuStrip contextMenu;
-        private System.Windows.Forms.ToolStripMenuItem asdToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem asdToolStripMenuItem1;
         private System.Windows.Forms.Label lblPretxb;
         private System.Windows.Forms.Label lblPosttxb;
         private System.Windows.Forms.NumericUpDown nudTimer;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.CheckBox chkBoxSonidoNotificacion;
     }
 }
 

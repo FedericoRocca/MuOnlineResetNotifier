@@ -27,7 +27,7 @@
     <PublisherName>Magus</PublisherName>
     <SuiteName>MuOnlineNotifier</SuiteName>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.1.0.0</ApplicationVersion>
+    <ApplicationVersion>1.2.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -136,6 +136,7 @@
     <None Include="Resources\Notification.wav" />
     <None Include="Resources\RR notifier.png" />
     <None Include="Resources\RR-notifier.ico" />
+    <None Include="Resources\Error Notification.wav" />
     <Content Include="RR-notifier.ico" />
   </ItemGroup>
   <ItemGroup>
