@@ -1,7 +1,11 @@
-﻿using System;
+﻿using MulandiaResetNotifier.Clases;
+using System;
 using System.Diagnostics;
+using System.IO;
 using System.Media;
+using System.Reflection;
 using System.Windows.Forms;
+using System.Windows.Media;
 using Tulpep.NotificationWindow;
 
 namespace MulandiaResetNotifier
@@ -14,6 +18,8 @@ namespace MulandiaResetNotifier
         }
         private Timer timerCheck;
         Process[] proc;
+        private string notifOK = "Notification.wav";
+        private string notifError = "Error Notification.wav";
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -33,14 +39,16 @@ namespace MulandiaResetNotifier
             popup.TitleText = "Personaje reseteado!";
             popup.ContentText = "Tu personaje llegó al nivel 400 y está listo para resetear";
             popup.Popup();
-            if( chkBoxSonidoNotificacion.Checked )
+            if (chkBoxSonidoNotificacion.Checked)
             {
-                SoundPlayer notification = new SoundPlayer(Properties.Resources.Notification);
-                notification.Play();
+                soundPlayer notification = new soundPlayer(notifOK);
+                notification.setVolume(tBarVolumen.Value);
+                notification.play();
             }
+
         }
 
-        private void launchErrorPopUp(string message)
+        void launchErrorPopUp(string message)
         {
             PopupNotifier popup = new PopupNotifier();
             popup.TitleText = "Se produjo un error";
@@ -48,14 +56,16 @@ namespace MulandiaResetNotifier
             popup.Popup();
             if (chkBoxSonidoNotificacion.Checked)
             {
-                SoundPlayer notification = new SoundPlayer(Properties.Resources.Error_Notification);
-                notification.Play();
+                soundPlayer notification = new soundPlayer(notifError);
+                notification.setVolume(tBarVolumen.Value);
+                notification.play();
             }
         }
 
-        public void setTimerInterval()
+            public void setTimerInterval()
         {
             int minutos = 60000;
+            #pragma warning disable CS0219 // La variable está asignada pero nunca se usa su valor -- DEBUG
             int segundos = 1000;
             timerCheck.Interval = Convert.ToInt32(nudTimer.Value) * minutos; //Convertimos a minutos y seteamos el intervalo
         }
@@ -127,6 +137,33 @@ namespace MulandiaResetNotifier
         private void formClose(object sender, FormClosingEventArgs e)
         {
             Hide();
+        }
+
+        private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Show();                                
+            WindowState = FormWindowState.Normal;
+        }
+
+        private void cerrarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        //private void showNotifyIconOptions(object sender, MouseEventArgs e)
+        //{
+        //    //Show();
+        //}
+
+        private void chkBoxSonidoNotificacion_CheckedChanged(object sender, EventArgs e)
+        {
+            if(chkBoxSonidoNotificacion.Checked)
+            {
+                tBarVolumen.Enabled = true;
+            } else
+            {
+                tBarVolumen.Enabled = false;
+            }
         }
     }
 }
