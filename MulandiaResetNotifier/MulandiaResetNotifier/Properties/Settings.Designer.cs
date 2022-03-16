@@ -22,5 +22,41 @@ namespace MulandiaResetNotifier.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool soundNotificationCheck {
+            get {
+                return ((bool)(this["soundNotificationCheck"]));
+            }
+            set {
+                this["soundNotificationCheck"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int volumeNotificationCheck {
+            get {
+                return ((int)(this["volumeNotificationCheck"]));
+            }
+            set {
+                this["volumeNotificationCheck"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int timerValue {
+            get {
+                return ((int)(this["timerValue"]));
+            }
+            set {
+                this["timerValue"] = value;
+            }
+        }
     }
 }

@@ -1,11 +1,7 @@
 ﻿using MulandiaResetNotifier.Clases;
 using System;
 using System.Diagnostics;
-using System.IO;
-using System.Media;
-using System.Reflection;
 using System.Windows.Forms;
-using System.Windows.Media;
 using Tulpep.NotificationWindow;
 
 namespace MulandiaResetNotifier
@@ -20,12 +16,18 @@ namespace MulandiaResetNotifier
         Process[] proc;
         private string notifOK = "Notification.wav";
         private string notifError = "Error Notification.wav";
+        Stopwatch resetTimer;
 
         private void Form1_Load(object sender, EventArgs e)
         {
             try
             {
+                resetTimer = new Stopwatch();
+                resetTimer.Start();
                 InitTimer(); //Iniciamos el timer
+                chkBoxSonidoNotificacion.Checked = (bool)Properties.Settings.Default["soundNotificationCheck"];
+                tBarVolumen.Value = (int)Properties.Settings.Default["volumeNotificationCheck"];
+                nudTimer.Value = (int)Properties.Settings.Default["timerValue"];
             }
             catch (Exception ex)
             {
@@ -62,12 +64,13 @@ namespace MulandiaResetNotifier
             }
         }
 
-            public void setTimerInterval()
+        public void setTimerInterval()
         {
             int minutos = 60000;
-            #pragma warning disable CS0219 // La variable está asignada pero nunca se usa su valor -- DEBUG
+#pragma warning disable CS0219 // La variable está asignada pero nunca se usa su valor -- DEBUG
             int segundos = 1000;
             timerCheck.Interval = Convert.ToInt32(nudTimer.Value) * minutos; //Convertimos a minutos y seteamos el intervalo
+
         }
 
         public void InitTimer()
@@ -76,6 +79,7 @@ namespace MulandiaResetNotifier
             timerCheck.Tick += new EventHandler(resetTimerTick); // Cuando se vence el timeout lanzamos el evento
             setTimerInterval();
             timerCheck.Start();
+            lblTiempoUltimoReset.Text = resetTimer.Elapsed.ToString();
         }
 
         private void resetTimerTick(object sender, EventArgs e) // Evento de vencimiento del timer
@@ -98,6 +102,7 @@ namespace MulandiaResetNotifier
                 string windowTitle = proc[0].MainWindowTitle;
                 if (windowTitle.Contains("Level: [400]"))
                 {
+                    resetTimer.Restart();
                     launchResetPopUp();
                 }
             }
@@ -127,21 +132,24 @@ namespace MulandiaResetNotifier
         private void timerChanged(object sender, EventArgs e)
         {
             setTimerInterval();
+            Properties.Settings.Default["timerValue"] = Convert.ToInt32(nudTimer.Value);
         }
 
         private void mainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Hide();
+            Properties.Settings.Default.Save();
         }
 
         private void formClose(object sender, FormClosingEventArgs e)
         {
             Hide();
+            Properties.Settings.Default.Save();
         }
 
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Show();                                
+            Show();
             WindowState = FormWindowState.Normal;
         }
 
@@ -150,20 +158,22 @@ namespace MulandiaResetNotifier
             Application.Exit();
         }
 
-        //private void showNotifyIconOptions(object sender, MouseEventArgs e)
-        //{
-        //    //Show();
-        //}
-
         private void chkBoxSonidoNotificacion_CheckedChanged(object sender, EventArgs e)
         {
-            if(chkBoxSonidoNotificacion.Checked)
+            if (chkBoxSonidoNotificacion.Checked)
             {
                 tBarVolumen.Enabled = true;
-            } else
+            }
+            else
             {
                 tBarVolumen.Enabled = false;
             }
+            Properties.Settings.Default["soundNotificationCheck"] = chkBoxSonidoNotificacion.Checked;
+        }
+
+        private void tBarVolumen_Scroll(object sender, EventArgs e)
+        {
+            Properties.Settings.Default["volumeNotificationCheck"] = tBarVolumen.Value;
         }
     }
 }

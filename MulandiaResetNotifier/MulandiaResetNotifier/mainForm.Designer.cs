@@ -34,15 +34,17 @@
             this.lblPosttxb = new System.Windows.Forms.Label();
             this.nudTimer = new System.Windows.Forms.NumericUpDown();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.chkBoxSonidoNotificacion = new System.Windows.Forms.CheckBox();
-            this.tBarVolumen = new System.Windows.Forms.TrackBar();
-            this.label1 = new System.Windows.Forms.Label();
             this.cmsTrayIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chkBoxSonidoNotificacion = new System.Windows.Forms.CheckBox();
+            this.tBarVolumen = new System.Windows.Forms.TrackBar();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblTiempoUltimoReset = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudTimer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tBarVolumen)).BeginInit();
             this.cmsTrayIcon.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tBarVolumen)).BeginInit();
             this.SuspendLayout();
             // 
             // lblPretxb
@@ -92,38 +94,6 @@
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
             this.notifyIcon.Text = "Mulandia Reset Notifier";
             this.notifyIcon.Visible = true;
-            //this.notifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.showNotifyIconOptions);
-            // 
-            // chkBoxSonidoNotificacion
-            // 
-            this.chkBoxSonidoNotificacion.AutoSize = true;
-            this.chkBoxSonidoNotificacion.Checked = true;
-            this.chkBoxSonidoNotificacion.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBoxSonidoNotificacion.Location = new System.Drawing.Point(97, 33);
-            this.chkBoxSonidoNotificacion.Name = "chkBoxSonidoNotificacion";
-            this.chkBoxSonidoNotificacion.Size = new System.Drawing.Size(184, 17);
-            this.chkBoxSonidoNotificacion.TabIndex = 6;
-            this.chkBoxSonidoNotificacion.Text = "Reproducir sonido de notificación";
-            this.chkBoxSonidoNotificacion.UseVisualStyleBackColor = true;
-            this.chkBoxSonidoNotificacion.CheckedChanged += new System.EventHandler(this.chkBoxSonidoNotificacion_CheckedChanged);
-            // 
-            // tBarVolumen
-            // 
-            this.tBarVolumen.Location = new System.Drawing.Point(97, 56);
-            this.tBarVolumen.Maximum = 100;
-            this.tBarVolumen.Name = "tBarVolumen";
-            this.tBarVolumen.Size = new System.Drawing.Size(184, 45);
-            this.tBarVolumen.TabIndex = 7;
-            this.tBarVolumen.Value = 75;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(124, 101);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(131, 13);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Volumen de la notificación";
             // 
             // cmsTrayIcon
             // 
@@ -147,11 +117,63 @@
             this.cerrarToolStripMenuItem.Text = "Cerrar";
             this.cerrarToolStripMenuItem.Click += new System.EventHandler(this.cerrarToolStripMenuItem_Click);
             // 
+            // chkBoxSonidoNotificacion
+            // 
+            this.chkBoxSonidoNotificacion.AutoSize = true;
+            this.chkBoxSonidoNotificacion.Checked = true;
+            this.chkBoxSonidoNotificacion.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoxSonidoNotificacion.Location = new System.Drawing.Point(97, 33);
+            this.chkBoxSonidoNotificacion.Name = "chkBoxSonidoNotificacion";
+            this.chkBoxSonidoNotificacion.Size = new System.Drawing.Size(184, 17);
+            this.chkBoxSonidoNotificacion.TabIndex = 6;
+            this.chkBoxSonidoNotificacion.Text = "Reproducir sonido de notificación";
+            this.chkBoxSonidoNotificacion.UseVisualStyleBackColor = true;
+            this.chkBoxSonidoNotificacion.CheckedChanged += new System.EventHandler(this.chkBoxSonidoNotificacion_CheckedChanged);
+            // 
+            // tBarVolumen
+            // 
+            this.tBarVolumen.Location = new System.Drawing.Point(97, 56);
+            this.tBarVolumen.Maximum = 100;
+            this.tBarVolumen.Name = "tBarVolumen";
+            this.tBarVolumen.Size = new System.Drawing.Size(184, 45);
+            this.tBarVolumen.TabIndex = 7;
+            this.tBarVolumen.Value = 75;
+            this.tBarVolumen.Scroll += new System.EventHandler(this.tBarVolumen_Scroll);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(124, 101);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(131, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Volumen de la notificación";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(55, 141);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(141, 13);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Tiempo desde el último reset";
+            // 
+            // lblTiempoUltimoReset
+            // 
+            this.lblTiempoUltimoReset.AutoSize = true;
+            this.lblTiempoUltimoReset.Location = new System.Drawing.Point(202, 141);
+            this.lblTiempoUltimoReset.Name = "lblTiempoUltimoReset";
+            this.lblTiempoUltimoReset.Size = new System.Drawing.Size(141, 13);
+            this.lblTiempoUltimoReset.TabIndex = 10;
+            this.lblTiempoUltimoReset.Text = "Tiempo desde el último reset";
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(416, 124);
+            this.ClientSize = new System.Drawing.Size(416, 125);
+            this.Controls.Add(this.lblTiempoUltimoReset);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tBarVolumen);
             this.Controls.Add(this.chkBoxSonidoNotificacion);
@@ -168,8 +190,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Resize += new System.EventHandler(this.mainForm_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.nudTimer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tBarVolumen)).EndInit();
             this.cmsTrayIcon.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tBarVolumen)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -186,6 +208,8 @@
         private System.Windows.Forms.ContextMenuStrip cmsTrayIcon;
         private System.Windows.Forms.ToolStripMenuItem abrirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cerrarToolStripMenuItem;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblTiempoUltimoReset;
     }
 }
 
