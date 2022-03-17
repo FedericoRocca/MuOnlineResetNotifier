@@ -100,7 +100,7 @@ namespace MulandiaResetNotifier
             {
                 proc = Process.GetProcessesByName("main"); // Obtenemos nuevamente el proceso, ya que el title de la ventana va cambiando
                 string windowTitle = proc[0].MainWindowTitle;
-                if (windowTitle.Contains("Level: [400]"))
+                if (windowTitle.Contains("Level: [400] Master"))
                 {
                     resetTimer.Restart();
                     launchResetPopUp();
