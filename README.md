@@ -1,3 +1,6 @@
+
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/FedericoRocca/MuOnlineResetNotifier?label=Latest%20release&style=for-the-badge)
+
 # MuOnlineResetNotifier
 Servicio que te notifica cuando llegás al nivel 400 para resetear
 
